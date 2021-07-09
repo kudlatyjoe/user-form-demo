@@ -3,7 +3,7 @@
         <div class="img-placeholder" (dragover)="allowDrop($event)" (drop)="onDrop($event)">
             <label>
                 <input class="img-input" type="file" (change)="fileChange($event)">
-                <img draggable="false" [src]="avatar ? avatar : '/assets/user_avatar.png'">
+                <img draggable="false" [src]="avatar ? avatar : './assets/user_avatar.png'">
             </label>
         </div>
         <mat-error class="custom-error" *ngIf="imageError">{{imageError}}</mat-error>
