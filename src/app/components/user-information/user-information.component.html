@@ -38,5 +38,8 @@
         </mat-form-field>     
         <button mat-button type="submit" [disabled]="!userForm.valid">Submit</button>
     </section>
-        
+    <div [ngClass]="showOverlay ? 'overlay show' : 'overlay'">
+        <mat-icon>check_circle_outline</mat-icon>
+        Form submitted!
+    </div>      
 </form>

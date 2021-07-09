@@ -17,6 +17,7 @@ export class UserInformationComponent {
   userForm: FormGroup
   avatar: string = ''
   imageError: string = ''
+  showOverlay: boolean = false
 
   constructor(
     private store: Store<fromStore.State>,
@@ -88,7 +89,8 @@ export class UserInformationComponent {
 
   onSubmit() {
     this.store.dispatch(new UserCreateAction(new User({...this.userForm.value, avatar: this.avatar})))
-    this.router.navigate(['/', 'profile'])
+    this.showOverlay = true
+    setTimeout(() => this.router.navigate(['/', 'profile']), 1000)
   }
 
 }

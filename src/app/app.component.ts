@@ -7,6 +7,6 @@ import { SessionStorageFacade } from './services/session-storage.facade';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-form-demo';
+  title = 'user-form-demo';
   constructor(private storageFacade: SessionStorageFacade) {}
 }

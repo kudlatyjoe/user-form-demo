@@ -8,8 +8,8 @@
 <mat-sidenav-container>
     <mat-sidenav #snav>
       <mat-nav-list class="nav-list">
-        <button mat-button><a routerLink="profile">Profile</a></button>
-        <button mat-button><a routerLink="information">Information</a></button>
+        <button (click)="snav.close()" mat-button><a routerLink="profile">Profile</a></button>
+        <button (click)="snav.close()" mat-button><a routerLink="information">Information</a></button>
       </mat-nav-list>
     </mat-sidenav>
 
