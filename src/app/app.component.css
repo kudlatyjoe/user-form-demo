@@ -1,0 +1,21 @@
+.nav-list {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    height: 32px;
+}
+
+mat-sidenav-container {
+    min-height: calc(100vh - 96px);
+}
+
+mat-toolbar {
+    padding: 5px;
+}
+
+.logo {
+    height: 30px;
+    margin-right: 10px;
+}

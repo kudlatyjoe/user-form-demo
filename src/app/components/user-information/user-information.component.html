@@ -1,0 +1,42 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-group">
+    <section class="section-pane section-left">
+        <div class="img-placeholder" (dragover)="allowDrop($event)" (drop)="onDrop($event)">
+            <label>
+                <input class="img-input" type="file" (change)="fileChange($event)">
+                <img draggable="false" [src]="avatar ? avatar : '/assets/user_avatar.png'">
+            </label>
+        </div>
+        <mat-error class="custom-error" *ngIf="imageError">{{imageError}}</mat-error>
+    </section >
+    <section class="section-pane section-right">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="First name" formControlName="firstName">
+            <mat-error>This field is required</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Last name" formControlName="lastName">
+            <mat-error>This field is required</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Email" formControlName="email">
+            <mat-error *ngIf="emailInvalid()">This field is required</mat-error>
+            <mat-error *ngIf="emailIncorrect()">Not a valid email</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Phone" formControlName="phone">
+            <mat-error *ngIf="phoneInvalid()">This field is required</mat-error>
+            <mat-error *ngIf="phoneIncorrect()">Not a valid phone number</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput readonly [matDatepicker]="picker" placeholder="Date of birth" formControlName="birthday"
+            (dateChange)="date($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="About" formControlName="about"></textarea>
+        </mat-form-field>     
+        <button mat-button type="submit" [disabled]="!userForm.valid">Submit</button>
+    </section>
+        
+</form>

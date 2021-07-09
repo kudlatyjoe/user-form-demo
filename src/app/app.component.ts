@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { APP_BOOTSTRAP_LISTENER, Component } from '@angular/core';
+import { SessionStorageFacade } from './services/session-storage.facade';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-form-demo';
+  constructor(private storageFacade: SessionStorageFacade) {}
 }
