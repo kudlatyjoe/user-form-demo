@@ -29,10 +29,7 @@ export class UserInformationComponent {
     private router: Router) { 
     this.user = this.storageFacade.getUser()
     this.userForm = new FormGroup({
-      firstName: new FormControl(this.user.firstName, [
-        Validators.required,
-        Validators.minLength(4)
-      ]),
+      firstName: new FormControl(this.user.firstName, Validators.required),
       lastName: new FormControl(this.user.lastName, Validators.required),
       email: new FormControl(this.user.email, [Validators.required, Validators.email]),
       phone: new FormControl(this.user.phone, [Validators.required, Validators.pattern(/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/)]),
