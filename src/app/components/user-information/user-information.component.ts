@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDatepickerInputBase } from '@angular/material/datepicker/datepicker-input-base';
+import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { User } from 'src/app/interfaces/User';
 import { ImageProcessService } from 'src/app/services/image-process.service';
+import { SessionStorageFacade } from 'src/app/services/session-storage.facade';
 import { UserCreateAction } from 'src/app/store/user.action';
 import * as fromStore from '../../store/index'
 
@@ -15,25 +17,29 @@ import * as fromStore from '../../store/index'
 })
 export class UserInformationComponent {
   userForm: FormGroup
-  avatar: string = ''
+  user: User = new User()
+  avatar: SafeResourceUrl = ''
   imageError: string = ''
   showOverlay: boolean = false
 
   constructor(
     private store: Store<fromStore.State>,
     private imageProcessService: ImageProcessService,
+    private storageFacade: SessionStorageFacade,
     private router: Router) { 
+    this.user = this.storageFacade.getUser()
     this.userForm = new FormGroup({
-      firstName: new FormControl('', [
+      firstName: new FormControl(this.user.firstName, [
         Validators.required,
         Validators.minLength(4)
       ]),
-      lastName: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      phone: new FormControl('', [Validators.required, Validators.pattern(/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/)]),
-      birthday: new FormControl(new Date(Date.now()), Validators.required),
-      about: new FormControl('')
-    });
+      lastName: new FormControl(this.user.lastName, Validators.required),
+      email: new FormControl(this.user.email, [Validators.required, Validators.email]),
+      phone: new FormControl(this.user.phone, [Validators.required, Validators.pattern(/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/)]),
+      birthday: new FormControl(new Date(this.user.birthday).toISOString().substring(0, 10), Validators.required),
+      about: new FormControl(this.user.about)
+    })
+    this.avatar = this.user.avatar
   }
 
   date(event: {target: MatDatepickerInputBase<any, any>}) {
